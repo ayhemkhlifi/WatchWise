@@ -1,11 +1,11 @@
 const User = require("../Models/userModels")
 
 
-module.exports={
+module.exports={ //signup {username ,email , password} => signup(req.body={usernae...})
     signup: async (req , res)=>{
-        const {email , password} = req.body
+        const {username, email , password} = req.body
         try{
-            const user = await User.signup(email,password)
+            const user = await User.signup(username,email,password)
             res.status(200).json(user)
 
         }catch(error){

@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose= require('mongoose')
 const dotenv = require('dotenv')
 const movieroutes=require('./Routes/movies')
+const userroutes= require('./Routes/users')
 dotenv.config()
 const app = express()
 
@@ -13,11 +14,11 @@ app.use(express.json())
 mongoose.connect(process.env.mongodburl)
 .then(()=>{
     console.log("connected to the database");
-    app.listen(3000,()=>{
+    app.listen(process.env.PORT,()=>{
         console.log("app listening on port ")
     })
 })
 
 app.use('/movies',movieroutes)
-
+app.use('/users',userroutes)
 

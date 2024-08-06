@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const Movie = require('../Models/movieModels')
 const MovieController = require('../controllers/moviecontrollers')
 
 //showing all the movies from the mongo data base 
@@ -31,4 +30,4 @@ router.patch('/:id',MovieController.ModifieMovie)
 
 
 
-module.exports=router ;
+module.exports=router 

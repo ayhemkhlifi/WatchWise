@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose= require('mongoose')
 const dotenv = require('dotenv')
 const movieroutes=require('./Routes/movies')
+const userroutes= require('./Routes/users')
 dotenv.config()
 const app = express()
 
@@ -19,5 +20,5 @@ mongoose.connect(process.env.mongodburl)
 })
 
 app.use('/movies',movieroutes)
-
+app.use('/users',userroutes)
 

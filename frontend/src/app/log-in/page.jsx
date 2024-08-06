@@ -4,6 +4,7 @@ import Image from "next/image";
 import logo from "@frontend/public/images/WatchWise_prev_ui.png";
 
 function LogIn() {
+  
   return (
     <section className="deepspace_inverse h-screen flex justify-center items-center">
       <form className="flex flex-col items-center gap-y-10 bg-gray-900 w-full max-w-md mx-auto rounded-2xl shadow-2xl">

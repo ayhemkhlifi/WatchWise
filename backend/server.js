@@ -13,7 +13,7 @@ app.use(express.json())
 mongoose.connect(process.env.mongodburl)
 .then(()=>{
     console.log("connected to the database");
-    app.listen(3000,()=>{
+    app.listen(process.env.PORT,()=>{
         console.log("app listening on port ")
     })
 })

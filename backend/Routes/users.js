@@ -6,7 +6,7 @@ const Usercontroller = require('../controllers/usercontrollers')
 
 
 //sign-in route 
-router.post('/signin',)
+router.post('/signin',Usercontroller.signin)
 
 
 

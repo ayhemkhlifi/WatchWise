@@ -10,10 +10,10 @@ module.exports={ //signup {username ,email , password} => signup(req.body={usern
         try{
             const user = await User.signup(username,email,password)
             const token = createToken(user._id)
-            res.status(200).json(user , token)
+            res.status(200).json(user,token)
 
         }catch(error){
-            res.status(401).json(error)
+            res.status(401).json({"error":error.message})
         }
         
 

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import logo from "@frontend/public/images/WatchWise_prev_ui.png";
-import { Search, User, Menu } from "./Icons"; 
+import { Link } from "react-router-dom"; // Use Link from react-router-dom
+import { Search, User, Menu } from "./Icones"; 
 import Sidebar from "./Sidebar";
 
 function Navbar() {
@@ -32,34 +30,28 @@ function Navbar() {
   ];
 
   return (
-    <section className="w-full  deepspace border-b-2 z-50 fixed">
+    <section className="w-full  border-b-2 z-50 fixed">
       <nav className="w-full deepspace ">
         <div className="flex items-center justify-between p-4">
           {/* Menu button for small screens */}
-          <button
-            onClick={toggleSidebar}
-            className="md:hidden text-white text-2xl"
-          >
+          <button onClick={toggleSidebar} className="md:hidden text-white text-2xl">
             <Menu />
           </button>
           {/* Logo and title */}
           <div className="text-white text-2xl font-bold flex items-center gap-1">
-            <Image src={logo} alt="logo" className="h-16 w-auto" />
+            <img src="/images/WatchWise_prev_ui.png" alt="logo" className="h-16 w-auto" />
             <h1>Watchwise</h1>
           </div>
           {/* Navigation links  */}
           <div className="hidden md:flex text-white text-lg gap-9">
             {navigation.map((item, index) => (
-              <Link key={index} href={item.href} className="hover:bg-orange-500 hover:text-black  p-2 rounded-xl">
+              <Link key={index} to={item.href} className="hover:bg-orange-500 hover:text-black p-2 rounded-xl">
                 {item.text}
               </Link>
             ))}
           </div>
           {/* Search  */}
-          <form
-            onSubmit={handleSearchSubmit}
-            className="hidden md:flex gap-1 items-center deepspace rounded-xl"
-          >
+          <form onSubmit={handleSearchSubmit} className="hidden md:flex gap-1 items-center bg-gray-900 rounded-xl">
             <label htmlFor="search" className="sr-only">Search</label>
             <input
               type="search"
@@ -74,7 +66,7 @@ function Navbar() {
             </button>
           </form>
           {/* Log-In  */}
-          <Link href="/log-in" className="hidden md:flex gap-2 hover:bg-orange-500 p-2 rounded-xl">
+          <Link to="/login" className="hidden md:flex gap-2 hover:bg-orange-500 p-2 rounded-xl text-white">
             <User />
             <h1 className="text-white text-lg">Log-In</h1>
           </Link>

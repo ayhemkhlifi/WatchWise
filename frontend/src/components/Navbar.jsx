@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Use Link from react-router-dom
+import { Link } from "react-router-dom"; 
 import { Search, User, Menu } from "./Icones"; 
 import Sidebar from "./Sidebar";
+
+
 
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");

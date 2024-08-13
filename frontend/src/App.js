@@ -15,18 +15,17 @@ function App() {
     <div className="deepspace h-screen">
     
    
-    <Navbar />
-    <Routes>
-      <Route path="/" element={<Main />} />
+    <Navbar/>
+
+      <Routes>
+      <Route path="/" element={<Main />}/>
       <Route path="/moviedetail" element={<MovieDetail />} />
       <Route path="/login" element={<LogIn />} />
       <Route path="/signup" element={<SignUp />} />
-      
       <Route path="/categorie-page" element={<Categorie />} />
-      
-    </Routes>
-  </div>
-    
+      </Routes>
+     
+  </div>  
   );
 }
 

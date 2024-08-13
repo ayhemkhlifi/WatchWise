@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom"; 
 import { Search, User, Menu } from "./Icones"; 
 import Sidebar from "./Sidebar";
-
+import { useLogout } from "../hooks/useLogout";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 
 function Navbar() {
+  const {logout} = useLogout();
+  const {user} = useAuthContext();
   const [searchQuery, setSearchQuery] = useState("");
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -68,10 +71,11 @@ function Navbar() {
             </button>
           </form>
           {/* Log-In  */}
-          <Link to="/login" className="hidden md:flex gap-2 hover:bg-orange-500 p-2 rounded-xl text-white">
+          {!user && <Link  to="/login" className="hidden md:flex gap-2 hover:bg-orange-500 p-2 rounded-xl text-white">
             <User />
             <h1 className="text-white text-lg">Log-In</h1>
-          </Link>
+          </Link>}
+          {user && <button  className="text-white text-lg md:flex" onClick={logout}> <User /> Logout</button>}
         </div>
       </nav>
       {/* Sidebar  */}

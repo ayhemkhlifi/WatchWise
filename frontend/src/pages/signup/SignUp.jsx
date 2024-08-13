@@ -50,7 +50,7 @@ function SignUp() {
           className="p-2 rounded w-full bg-gray-800 text-white border border-gray-700"
         />
         <button 
-          
+          disabled={isLoading}
           type="submit"
           onClick={handleSubmit} 
           className="bg-orange-600 text-white p-2 rounded w-full mt-4 hover:bg-orange-500"

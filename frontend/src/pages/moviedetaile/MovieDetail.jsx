@@ -21,6 +21,7 @@ function MovieDetail() {
           }
         );
         const result = await response.json();
+        console.log(result);
         setMovie(result);
         setLoading(false);
       } catch (error) {

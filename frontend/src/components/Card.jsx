@@ -19,6 +19,8 @@ function Card(props){
                       <h2 className="text-sm text-gray-400 mt-1">
                         Rating: {result.vote_average}
                       </h2>
+                      {result.title && <h2>movie</h2>}
+                      {result.name && <h2>TV show</h2>}
                     </div>
                   </Link>
                 </div>

@@ -7,6 +7,7 @@ import LogIn from './pages/login/LogIn';
 import Main from './components/Main';
 import Categorie from './pages/categorie-page/Categorie';
 import MovieDetail from './pages/moviedetaile/MovieDetail';
+import Footer from './components/Footer';
 import { BrowserRouter as Router, Route, Routes , Navigate } from 'react-router-dom';
 
 function App() {
@@ -20,11 +21,13 @@ function App() {
 
       <Routes>
       <Route path="/" element={<Main />}/>
-      <Route path="/moviedetail" element={<MovieDetail />} />
+      <Route path="/movie/:id" element={<MovieDetail />} />
       <Route path="/login" element={ !user ?   <LogIn /> : <Navigate to='/'/>  } />
       <Route path="/signup" element={ !user ? <SignUp />  : <Navigate to='/'/> } />
       <Route path="/categorie-page" element={<Categorie />} />
       </Routes>
+      
+      <Footer/>
      
   </div>  
   );

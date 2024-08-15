@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Torigntarow } from "./Icones";
-import Footer from "./Footer";
 import About from "./About";
 
 function Main() {
@@ -9,6 +8,7 @@ function Main() {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [tvShows, setTvShows] = useState([]);
   const [upcommings, setupcomings] = useState([]);
+  const [topratedseries, setTopratedseries] = useState([]);
   const [PopularPeople, setPopularPeople] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
@@ -17,6 +17,7 @@ function Main() {
   const topRatedMoviesRef = useRef(null);
   const tvShowsRef = useRef(null);
   const upcomingmoviesRef = useRef(null);
+  const topratedseriesRef = useRef(null);
   const popularPeopleRef = useRef(null);
 
   const options = {
@@ -75,6 +76,21 @@ function Main() {
       setLoading(false);
     }
   };
+  const fetchtopratedshows = async () => {
+    try {
+      const response = await fetch(
+        "https://api.themoviedb.org/3/tv/top_rated?language=anglais&page=1",
+        options
+      );
+      const result = await response.json();
+      console.log(result);
+      setTopratedseries(result.results || []);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
   const fetchPopularPeople = async () => {
     try {
       const response = await fetch(
@@ -95,6 +111,7 @@ function Main() {
     fetchTopRatedMovies();
     fetchPopularTvShows();
     fetchUpcomingMovies();
+    fetchtopratedshows ();
     fetchPopularPeople();
 
     const handleScroll = () => {
@@ -169,7 +186,7 @@ function Main() {
                   key={index}
                   className="flex-none w-52 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
                 >
-                  <Link to="/moviedetail">
+                  <Link to={`/movie/${movie.id}`}>
                     <img
                       src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                       alt={movie.title}
@@ -192,6 +209,9 @@ function Main() {
               &#8250;
             </button>
           </div>
+
+
+        
           {/* upcomming movies */}
           <Link className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center">
             <div className="h-10 border-l-4 border-yellow-600"></div>
@@ -216,7 +236,7 @@ function Main() {
                   key={index}
                   className="flex-none w-52 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
                 >
-                  <Link to="/moviedetail">
+                  <Link to={`/movie/${movie.id}`}>
                     <img
                       src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                       alt={movie.title}
@@ -240,6 +260,8 @@ function Main() {
             </button>
           </div>
 
+
+
           {/* Popular TV Shows */}
           <Link className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center">
             <div className="h-10 border-l-4 border-yellow-600"></div>
@@ -258,21 +280,21 @@ function Main() {
               ref={tvShowsRef}
               className="flex flex-nowrap overflow-x-scroll scrollbar-hide gap-6 px-10 animate-slideUp"
             >
-              {tvShows.map((show, index) => (
+              {tvShows.map((movie, index) => (
                 <div
                   key={index}
                   className="flex-none w-52 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
                 >
-                  <Link to="/moviedetail">
+                  <Link to={`/movie/${movie.id}`}>
                     <img
-                      src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
-                      alt={show.name}
+                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      alt={movie.name}
                       className="w-full h-auto"
                     />
                     <div className="p-4 text-center">
-                      <h2 className="text-lg font-semibold">{show.name}</h2>
+                      <h2 className="text-lg font-semibold">{movie.name}</h2>
                       <h2 className="text-sm text-gray-400 mt-1">
-                        Rating: {show.vote_average}
+                        Rating: {movie.vote_average}
                       </h2>
                     </div>
                   </Link>
@@ -286,6 +308,57 @@ function Main() {
               &#8250;
             </button>
           </div>
+
+
+
+          {/* Top rated TV Shows */}
+          <Link className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center">
+            <div className="h-10 border-l-4 border-yellow-600"></div>
+
+            <h2>Top rated TV Shows</h2>
+            <Torigntarow />
+          </Link>
+          <div className="relative">
+            <button
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-gray-900 to-transparent text-white p-2 rounded-full z-10 hover:scale-110 transition-transform"
+              onClick={() => scrollLeft(topratedseriesRef)}
+            >
+              &#8249;
+            </button>
+            <div
+              ref={topratedseriesRef}
+              className="flex flex-nowrap overflow-x-scroll scrollbar-hide gap-6 px-10 animate-slideUp"
+            >
+              {topratedseries.map((movie, index) => (
+                <div
+                  key={index}
+                  className="flex-none w-52 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
+                >
+                  <Link to={`/movie/${movie.id}`}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      alt={movie.name}
+                      className="w-full h-auto"
+                    />
+                    <div className="p-4 text-center">
+                      <h2 className="text-lg font-semibold">{movie.name}</h2>
+                      <h2 className="text-sm text-gray-400 mt-1">
+                        Rating: {movie.vote_average}
+                      </h2>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+            <button
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gradient-to-l from-gray-900 to-transparent text-white p-2 rounded-full z-10 hover:scale-110 transition-transform"
+              onClick={() => scrollRight(topratedseriesRef)}
+            >
+              &#8250;
+            </button>
+          </div>
+
+
           {/* Popular people */}
           <Link
             to="/categorie-page"
@@ -346,7 +419,7 @@ function Main() {
         </>
       )}
       <About/>
-      <Footer />
+     
 
       {showScrollTopButton && (
             <button

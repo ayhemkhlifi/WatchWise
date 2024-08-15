@@ -4,21 +4,35 @@ import { Search, User, Menu } from "./Icones";
 import Sidebar from "./Sidebar";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import SearchResultContainer  from './SearchResultContainer'
 
 function Navbar() {
   const {logout} = useLogout();
   const {user} = useAuthContext();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchresult,setSearchResult] = useState([]);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMGRjYWNjMWE2NmFlM2Y5OWYzNDI5MDQ1NzkxMjE3NCIsIm5iZiI6MTcyMzI5ODQ1OS40MzIxMTksInN1YiI6IjY2YjNhZDAyN2E2NTM4Yzg4MDdiOTY4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uFXqJqKeYf4Fgx48e-7TW6t3VwTkoqwOIRgxF12gaxc",
+    },
+  };
+  
+  const handleSearchChange = async (e) => {
+    if((e.target.value.length > 0)){
+    const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(e.target.value)}&include_adult=false&language=en-US&page=1`,options)
+    const json =await  response.json()
+    setSearchResult(json.results || [])
+    }else{
+      setSearchResult([])
+    } 
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log("Search Query: ", searchQuery);
+    //redirect to page with lots of movies with that name (work on it later)
   };
 
   const toggleSidebar = () => {
@@ -56,12 +70,11 @@ function Navbar() {
             ))}
           </div>
           {/* Search  */}
-          <form onSubmit={handleSearchSubmit} className="hidden md:flex gap-1 items-center bg-gray-900 rounded-xl">
+          <div className="relative flex flex-col w-80 items-center">
+            <form onSubmit={handleSearchSubmit} className="hidden md:flex gap-1 items-center bg-gray-900 rounded-xl">
             <label htmlFor="search" className="sr-only">Search</label>
             <input
-              type="search"
-              id="search"
-              value={searchQuery}
+              
               onChange={handleSearchChange}
               placeholder="Search"
               className="rounded-xl text-center p-2 border-none"
@@ -70,6 +83,11 @@ function Navbar() {
               <Search />
             </button>
           </form>
+          <SearchResultContainer results={searchresult}/>
+           
+          </div>
+          
+          
           {/* Log-In  */}
           {!user && <Link  to="/login" className="hidden md:flex gap-2 hover:bg-orange-500 p-2 rounded-xl text-white">
             <User />

@@ -35,7 +35,7 @@ function Navbar() {
   ];
 
   return (
-    <section className="w-full  border-b-2 z-50 fixed">
+    <section className="w-full   z-50 fixed">
       <nav className="w-full deepspace ">
         <div className="flex items-center justify-between p-4">
           {/* Menu button for small screens */}

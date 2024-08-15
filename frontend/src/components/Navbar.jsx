@@ -9,7 +9,8 @@ import SearchResultContainer  from './SearchResultContainer'
 function Navbar() {
   const {logout} = useLogout();
   const {user} = useAuthContext();
-  const [searchresult,setSearchResult] = useState([]);
+  const [searchresultmovie,setSearchResultMovie] = useState([]);
+  const [searchresulttv,setSearchResultTv] = useState([]);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const options = {
     method: "GET",
@@ -22,12 +23,20 @@ function Navbar() {
   
   const handleSearchChange = async (e) => {
     if((e.target.value.length > 0)){
-    const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(e.target.value)}&include_adult=false&language=en-US&page=1`,options)
-    const json =await  response.json()
-    setSearchResult(json.results || [])
+    const response1 = await fetch(`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(e.target.value)}&include_adult=false&language=en-US&page=1`,options)
+    const json1 =await  response1.json()
+    setSearchResultMovie(json1.results || [])
+    const response2 = await fetch(`https://api.themoviedb.org/3/search/tv?query=${encodeURIComponent(e.target.value)}&include_adult=false&language=en-US&page=1`,options)
+    const json2 = await response2.json()
+    setSearchResultTv(json2.results||[])
+    console.log(json2.results)
     }else{
-      setSearchResult([])
+      setSearchResultMovie([])
+      setSearchResultTv([])
     } 
+    
+    
+
   };
 
   const handleSearchSubmit = (e) => {
@@ -74,7 +83,6 @@ function Navbar() {
             <form onSubmit={handleSearchSubmit} className="hidden md:flex gap-1 items-center bg-gray-900 rounded-xl">
             <label htmlFor="search" className="sr-only">Search</label>
             <input
-              
               onChange={handleSearchChange}
               placeholder="Search"
               className="rounded-xl text-center p-2 border-none"
@@ -83,7 +91,7 @@ function Navbar() {
               <Search />
             </button>
           </form>
-          <SearchResultContainer results={searchresult}/>
+          <SearchResultContainer  movieresults={searchresultmovie} tvresults={searchresulttv}/>
            
           </div>
           

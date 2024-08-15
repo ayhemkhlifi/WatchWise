@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Torigntarow } from "./Icones";
 import About from "./About";
+import Card from "./Card";
 
 function Main() {
   const [movies, setMovies] = useState([]);
@@ -182,24 +183,7 @@ function Main() {
               className="flex flex-nowrap overflow-x-scroll scrollbar-hide gap-6 px-10 animate-slideUp"
             >
               {topRatedMovies.map((movie, index) => (
-                <div
-                  key={index}
-                  className="flex-none w-52 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
-                >
-                  <Link to={`/movie/${movie.id}`}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      alt={movie.title}
-                      className="w-full h-auto"
-                    />
-                    <div className="p-4 text-center">
-                      <h2 className="text-lg font-semibold">{movie.title}</h2>
-                      <h2 className="text-sm text-gray-400 mt-1">
-                        Rating: {movie.vote_average}
-                      </h2>
-                    </div>
-                  </Link>
-                </div>
+                <Card result={movie} key={index}/>
               ))}
             </div>
             <button
@@ -232,24 +216,7 @@ function Main() {
               className="flex flex-nowrap overflow-x-scroll scrollbar-hide gap-6 px-10 animate-slideUp"
             >
               {upcommings.map((movie, index) => (
-                <div
-                  key={index}
-                  className="flex-none w-52 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
-                >
-                  <Link to={`/movie/${movie.id}`}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      alt={movie.title}
-                      className="w-full h-auto"
-                    />
-                    <div className="p-4 text-center">
-                      <h2 className="text-lg font-semibold">{movie.title}</h2>
-                      <h2 className="text-sm text-gray-400 mt-1">
-                        release date: {movie.release_date}
-                      </h2>
-                    </div>
-                  </Link>
-                </div>
+                <Card result={movie} key={index}/>
               ))}
             </div>
             <button
@@ -281,24 +248,7 @@ function Main() {
               className="flex flex-nowrap overflow-x-scroll scrollbar-hide gap-6 px-10 animate-slideUp"
             >
               {tvShows.map((movie, index) => (
-                <div
-                  key={index}
-                  className="flex-none w-52 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
-                >
-                  <Link to={`/movie/${movie.id}`}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      alt={movie.name}
-                      className="w-full h-auto"
-                    />
-                    <div className="p-4 text-center">
-                      <h2 className="text-lg font-semibold">{movie.name}</h2>
-                      <h2 className="text-sm text-gray-400 mt-1">
-                        Rating: {movie.vote_average}
-                      </h2>
-                    </div>
-                  </Link>
-                </div>
+                <Card result={movie} key={index} />
               ))}
             </div>
             <button
@@ -330,24 +280,7 @@ function Main() {
               className="flex flex-nowrap overflow-x-scroll scrollbar-hide gap-6 px-10 animate-slideUp"
             >
               {topratedseries.map((movie, index) => (
-                <div
-                  key={index}
-                  className="flex-none w-52 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
-                >
-                  <Link to={`/movie/${movie.id}`}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      alt={movie.name}
-                      className="w-full h-auto"
-                    />
-                    <div className="p-4 text-center">
-                      <h2 className="text-lg font-semibold">{movie.name}</h2>
-                      <h2 className="text-sm text-gray-400 mt-1">
-                        Rating: {movie.vote_average}
-                      </h2>
-                    </div>
-                  </Link>
-                </div>
+                <Card result={movie} key={index}/>
               ))}
             </div>
             <button

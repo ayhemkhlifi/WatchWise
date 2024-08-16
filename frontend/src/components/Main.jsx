@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Torigntarow } from "./Icones";
 import About from "./About";
 import Card from "./Card";
+import Footer from "./Footer";
 
 function Main() {
   const [movies, setMovies] = useState([]);
@@ -32,82 +33,99 @@ function Main() {
 
   const fetchTopRatedMovies = async () => {
     try {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
-        options
+      const pages = [1, 2, 3, 4, 5]; // Array of pages to fetch
+      const promises = pages.map(page =>
+        fetch(`https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`, options)
+          .then(response => response.json())
       );
-      const result = await response.json();
-
-      setTopRatedMovies(result.results || []);
+  
+      const results = await Promise.all(promises);
+      const allMovies = results.flatMap(result => result.results || []);
+  
+      setTopRatedMovies(allMovies);
       setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(false);
     }
   };
-
+  
   const fetchPopularTvShows = async () => {
     try {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
-        options
+      const pages = [1, 2, 3, 4, 5];
+      const promises = pages.map(page =>
+        fetch(`https://api.themoviedb.org/3/tv/popular?language=en-US&page=${page}`, options)
+          .then(response => response.json())
       );
-      const result = await response.json();
-      console.log(result);
-      setTvShows(result.results || []);
+  
+      const results = await Promise.all(promises);
+      const allTvShows = results.flatMap(result => result.results || []);
+  
+      setTvShows(allTvShows);
       setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(false);
     }
   };
-
+  
   const fetchUpcomingMovies = async () => {
     try {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
-        options
+      const pages = [1, 2, 3, 4, 5];
+      const promises = pages.map(page =>
+        fetch(`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`, options)
+          .then(response => response.json())
       );
-      const result = await response.json();
-      console.log(result);
-      setupcomings(result.results || []);
+  
+      const results = await Promise.all(promises);
+      const allUpcomingMovies = results.flatMap(result => result.results || []);
+  
+      setupcomings(allUpcomingMovies);
       setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(false);
     }
   };
+  
   const fetchtopratedshows = async () => {
     try {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/tv/top_rated?language=anglais&page=1",
-        options
+      const pages = [1, 2, 3, 4, 5];
+      const promises = pages.map(page =>
+        fetch(`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`, options)
+          .then(response => response.json())
       );
-      const result = await response.json();
-      console.log(result);
-      setTopratedseries(result.results || []);
+  
+      const results = await Promise.all(promises);
+      const allTopRatedShows = results.flatMap(result => result.results || []);
+  
+      setTopratedseries(allTopRatedShows);
       setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(false);
     }
   };
+  
   const fetchPopularPeople = async () => {
     try {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/person/popular?language=en-US&page=1",
-        options
+      const pages = [1, 2, 3, 4, 5];
+      const promises = pages.map(page =>
+        fetch(`https://api.themoviedb.org/3/person/popular?language=en-US&page=${page}`, options)
+          .then(response => response.json())
       );
-      const result = await response.json();
-      console.log(result);
-      setPopularPeople(result.results || []);
+  
+      const results = await Promise.all(promises);
+      const allPopularPeople = results.flatMap(result => result.results || []);
+  
+      setPopularPeople(allPopularPeople);
       setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(false);
     }
   };
-
+  
   useEffect(() => {
     fetchTopRatedMovies();
     fetchPopularTvShows();
@@ -247,8 +265,8 @@ function Main() {
               ref={tvShowsRef}
               className="flex flex-nowrap overflow-x-scroll scrollbar-hide gap-6 px-10 animate-slideUp"
             >
-              {tvShows.map((movie, index) => (
-                <Card result={movie} key={index} />
+              {tvShows.map((tv, index) => (
+                <Card result={tv} key={index} />
               ))}
             </div>
             <button
@@ -279,8 +297,8 @@ function Main() {
               ref={topratedseriesRef}
               className="flex flex-nowrap overflow-x-scroll scrollbar-hide gap-6 px-10 animate-slideUp"
             >
-              {topratedseries.map((movie, index) => (
-                <Card result={movie} key={index}/>
+              {topratedseries.map((tv, index) => (
+                <Card result={tv} key={index}/>
               ))}
             </div>
             <button
@@ -351,7 +369,9 @@ function Main() {
           </div>
         </>
       )}
+
       <About/>
+      <Footer/>
      
 
       {showScrollTopButton && (

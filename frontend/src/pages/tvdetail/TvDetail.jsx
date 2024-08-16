@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function MovieDetail() {
+function TvDetail() {
   const { id } = useParams(); 
-  const [movie, setMovie] = useState(null);
+  const [tvshow, setTvshow] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const options = {
@@ -16,15 +16,15 @@ function MovieDetail() {
   };
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
+    const fetchTvDetails = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${id}?language=anglais`,
+          `https://api.themoviedb.org/3/tv/${id}?language=anglais`,
           options
         );
         const result = await response.json();
         console.log(result);
-        setMovie(result);
+        setTvshow(result);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -32,7 +32,7 @@ function MovieDetail() {
       }
     };
 
-    fetchMovieDetails();
+    fetchTvDetails();
   }, [id]);
 
   if (loading) {
@@ -48,48 +48,32 @@ function MovieDetail() {
 
   return (
     <div className="pt-28 deepspace  flex flex-col lg:flex-row items-center w-full justify-around">
-      {movie && (
+      {tvshow && (
         <>
           <div className="lg:w-[50%] w-full p-4 lg:px-8 animate-slideUp ">
             <h1 className="text-4xl font-bold text-yellow-500">
-              {movie.title}
+              {tvshow.name}
             </h1>
-            <p className="text-lg mt-4 text-white">{movie.overview}</p>
+            <p className="text-lg mt-4 text-white">{tvshow.overview}</p>
             <div className="mt-4 text-white">
               <p>
-                <strong>Original Title:</strong> {movie.original_title}
+                <strong>Original Title:</strong> {tvshow.original_name}
               </p>
               <p>
-                <strong>Release Date:</strong> {movie.release_date}
+                <strong>Release Date:</strong> {tvshow.release_date}
               </p>
-              <p>
-                <strong>Runtime:</strong> {movie.runtime} minutes
-              </p>
+              
               <p>
                 <strong>Genres:</strong>{" "}
-                {movie.genres.map((genre) => genre.name)}
+                {tvshow.genres.map((genre) => genre.name)}
               </p>
-              <p>
-                <strong>Original Language:</strong> {movie.original_language}
-              </p>
-              <p>
-                <strong>Popularity:</strong> {movie.popularity}
-              </p>
-              <p>
-                <strong>Revenue:</strong> ${movie.revenue}
-              </p>
-              <p>
-                <strong>Status:</strong> {movie.status}
-              </p>
-              <p>
-                <strong>Tagline:</strong> {movie.tagline}
-              </p>
+              
             </div>
           </div>
           <div className=" px-4 lg:px-8 mt-8 lg:mt-0 flex justify-center lg:justify-end">
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
+              src={`https://image.tmdb.org/t/p/w500${tvshow.poster_path}`}
+              alt={tvshow.name}
               className="w-full max-w-xs lg:w-96 h-auto mb-4 animate-slideUp"
             />
           </div>
@@ -99,4 +83,4 @@ function MovieDetail() {
   );
 }
 
-export default MovieDetail;
+export default TvDetail;

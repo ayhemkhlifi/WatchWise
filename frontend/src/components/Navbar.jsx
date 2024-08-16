@@ -54,7 +54,7 @@ function Navbar() {
 
   const navigation = [
     { text: "Home", href: "/" },
-    { text: "Discover", href: "/" },
+    { text: "Discover", href: "/choose-filter" },
   ];
 
   return (

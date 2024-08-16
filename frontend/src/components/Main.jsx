@@ -266,7 +266,7 @@ function Main() {
               className="flex flex-nowrap overflow-x-scroll scrollbar-hide gap-6 px-10 animate-slideUp"
             >
               {tvShows.map((tv, index) => (
-                <Card result={tv} key={index} type="tv"/>
+                <Card result={tv} key={index} />
               ))}
             </div>
             <button
@@ -298,7 +298,7 @@ function Main() {
               className="flex flex-nowrap overflow-x-scroll scrollbar-hide gap-6 px-10 animate-slideUp"
             >
               {topratedseries.map((tv, index) => (
-                <Card result={tv} key={index} type="tv"/>
+                <Card result={tv} key={index}/>
               ))}
             </div>
             <button

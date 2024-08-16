@@ -8,6 +8,10 @@ import Main from './components/Main';
 import Categorie from './pages/categorie-page/Categorie';
 import MovieDetail from './pages/moviedetaile/MovieDetail';
 import Footer from './components/Footer';
+import FilterableMovies from './pages/filtermovie/FilterableMovies';
+import FilterableTvShows from './pages/filtertv/FilterableTvShows';
+import Choosef from './pages/choose-filter/Choosef';
+import TvDetail from './pages/tvdetail/TvDetail';
 import { BrowserRouter as Router, Route, Routes , Navigate } from 'react-router-dom';
 
 function App() {
@@ -22,12 +26,17 @@ function App() {
       <Routes>
       <Route path="/" element={<Main />}/>
       <Route path="/movie/:id" element={<MovieDetail />} />
+      <Route path="/tv/:id" element={<TvDetail />} />
       <Route path="/login" element={ !user ?   <LogIn /> : <Navigate to='/'/>  } />
       <Route path="/signup" element={ !user ? <SignUp />  : <Navigate to='/'/> } />
       <Route path="/categorie-page" element={<Categorie />} />
+      <Route path="/choose-filter" element={<Choosef />} />
+
+      <Route path="/filtermovie" element={<FilterableMovies />} />
+      <Route path="/filtertv" element={<FilterableTvShows />} />
       </Routes>
       
-      <Footer/>
+   
      
   </div>  
   );

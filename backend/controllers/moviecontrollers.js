@@ -4,14 +4,20 @@ const Movie = require('../Models/movieModels')
 
 module.exports={
     AddMovie:async (req , res,next )=>{
-    
-        const {title , posterpath} = req.body 
+        const {movieid,title , poster_path ,imbd_rating} = req.body 
+        const mi= movieid
         const t = title 
-        const p = posterpath  
+        const p = poster_path  
+        const i = imbd_rating
+        const ui = req.user._id
+        
         try{
-                    if((await Movie.countDocuments({title:t , posterpath:p}))==0){
-                        const movie = await Movie.create({title:t , posterpath:p})
-                        res.status(200).json(movie)
+                    if((await Movie.countDocuments({movieid:mi,title:t , poster_path:p,imbd_rating:i,user_id:ui}))==0){
+                        console.log('user doesnt have this movie in his watched list yet ')
+                        const m = await Movie.create({movieid:mi,title:t,poster_path:p,imbd_rating:i,user_id:ui})
+                        console.log('added the moveie the the database')
+                        res.status(200).json(m)
+                        
                     }
                     else
                     {
@@ -20,27 +26,32 @@ module.exports={
             }
              
             catch(error){
-             res.status(400).json({"message":"error with the post methode"})
+             res.status(400).json({error:error})
         }
     }
     ,
     ShowMovies:async (req , res , next)=>{
+        const ui = req.user._id
         if((await Movie.countDocuments({})==0)){
             res.status(200).json({"message":"no movies exist here"})
         }else{
-            const results = await Movie.find()
-            res.json(results)
+            const results = await Movie.find({user_id:ui})
+            res.status(200).json(results)
         }
     }
     ,
     ShowMovie:async(req , res , next )=>{
-        
-        
+        const {id} = req.params
+        const ui = req.user._id
         if((await Movie.countDocuments({})==0)){
             res.status(200).json({"message":"no movies exist here"})
         }else{
-            const results = await Movie.find()
-            res.json(results[0])
+            const results = await Movie.findOne({movieid:id,user_id:ui })
+            if(results){
+                res.status(200).json(results)
+            }else{
+                res.status(404).json({"message":"couldnt find this movie for the user"})
+            }
         }
 
     }

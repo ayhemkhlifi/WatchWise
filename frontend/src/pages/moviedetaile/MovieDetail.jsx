@@ -8,13 +8,18 @@ function MovieDetail() {
   const [loading, setLoading] = useState(true);
   const {user} = useAuthContext();
   const [watched , setWatched] = useState(false);
+
+
+
+
+
  const handleadd = async () => {
   const mi=movie.id
   const t=movie.original_title
   const p=movie.poster_path
   const i=movie.vote_average
-  
-  const postoptions = {
+  if(user){
+     const postoptions = {
   method:'POST',
   headers:{
     'Content-Type':'application/json' ,
@@ -26,10 +31,14 @@ function MovieDetail() {
     'poster_path':p,
     'imbd_rating':i
   }),
+   
  }
-  const response = await fetch ('/movies',postoptions)
+ const response = await fetch ('/movies',postoptions)
   const json = await response.json()
   setWatched(true)
+  }
+ 
+ 
  }
 
 
@@ -65,7 +74,7 @@ function MovieDetail() {
     ()=>{
       const findmovie = async () => {
         
-        if(movie){
+        if(movie && user){
           const postoptions = {
           method:'GET',
           headers:{

@@ -31,7 +31,7 @@ function SearchResultContainer(props){
         }
         else{
             return(
-            <div className="flex flex-col  absolute bg-white top-12 rounded-md w-96 h-80 overflow-y-scroll " ref={searchRef}>
+            <div className="flex flex-col  absolute deepspace top-12 rounded-md w-96 h-80 overflow-y-scroll scrollbar-hide p-6 " ref={searchRef}>
                 <h1 className='  font-bold text-white deepspace '>Movies:</h1>
                 {movieresults.map((result , index)=>(
                     <SearchResult result={result} index={index}/>

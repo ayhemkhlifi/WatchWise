@@ -8,13 +8,13 @@ function Choosef() {
       <div className="flex flex-col md:flex-row gap-8">
         <Link
           to="/filtermovie"
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transform transition-transform hover:scale-105"
+          className="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transform transition-transform hover:scale-105"
         >
           Filter Movies
         </Link>
         <Link
           to="/filtertv"
-          className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transform transition-transform hover:scale-105"
+          className="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transform transition-transform hover:scale-105"
         >
           Filter TV Shows
         </Link>

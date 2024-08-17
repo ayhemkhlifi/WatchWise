@@ -4,23 +4,45 @@ import { Link } from "react-router-dom";
 function FilterableMovies() {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [genre, setGenre] = useState("");
+  const [genres, setGenres] = useState([]);
   const [rating, setRating] = useState("");
   const [releaseYear, setReleaseYear] = useState("");
+
+  const genreList = [
+    { name: "Action", id: 28 },
+    { name: "Adventure", id: 12 },
+    { name: "Animation", id: 16 },
+    { name: "Comedy", id: 35 },
+    { name: "Crime", id: 80 },
+    { name: "Documentary", id: 99 },
+    { name: "Drama", id: 18 },
+    { name: "Family", id: 10751 },
+    { name: "Fantasy", id: 14 },
+    { name: "History", id: 36 },
+    { name: "Horror", id: 27 },
+    { name: "Music", id: 10402 },
+    { name: "Mystery", id: 9648 },
+    { name: "Romance", id: 10749 },
+    { name: "Science Fiction", id: 878 },
+    { name: "TV Movie", id: 10770 },
+    { name: "Thriller", id: 53 },
+    { name: "War", id: 10752 },
+    { name: "Western", id: 37 },
+  ];
 
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMGRjYWNjMWE2NmFlM2Y5OWYzNDI5MDQ1NzkxMjE3NCIsIm5iZiI6MTcyMzY2MDM2Ny42NTExMDgsInN1YiI6IjY2YjNhZDAyN2E2NTM4Yzg4MDdiOTY4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cURFiSbWrh7tKf-mMnr6wHmVSPKiyGIRGbQyGYaRzOg'
-  },
+    },
   };
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const pages =[];
-        for (let i = 1; i <= 100; i++) {
+        const pages = [];
+        for (let i = 1; i <= 200; i++) {
           pages.push(i);
         }
         const promises = pages.map(page =>
@@ -42,35 +64,52 @@ function FilterableMovies() {
   }, []);
 
   useEffect(() => {
-    let filtered = movies;
+    const fetchFilteredMovies = async () => {
+      try {
+        let genreSelected = genres.length > 0 ? genres.join(",") : "";
 
-    if (genre) {
-      filtered = filtered.filter(movie => movie.genre_ids.includes(Number(genre)));
+        const response = await fetch(
+          `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genreSelected}&vote_average.gte=${rating}&primary_release_year=${releaseYear}`,
+          options
+        );
+        const data = await response.json();
+
+        setFilteredMovies(data.results || []);
+      } catch (error) {
+        console.error("Failed to fetch filtered movies:", error);
+      }
+    };
+
+    fetchFilteredMovies();
+  }, [genres, rating, releaseYear]);
+
+  
+   //function for changing the genres list (add or delet from it )
+  const handleGenre = (genreId) => {
+    if (genres.includes(genreId)) {
+      setGenres(genres.filter((id) => id !== genreId));
+    } else {
+      setGenres([...genres, genreId]);
     }
-
-    if (rating) {
-      filtered = filtered.filter(movie => movie.vote_average >= rating);
-    }
-
-    if (releaseYear) {
-      filtered = filtered.filter(movie => new Date(movie.release_date).getFullYear() === Number(releaseYear));
-    }
-
-    setFilteredMovies(filtered);
-  }, [genre, rating, releaseYear, movies]);
+  };
 
   return (
     <div className="pt-28 deepspace min-h-screen w-full text-white flex flex-col items-center">
       <h1 className="text-4xl font-bold mb-6">Filter Movies</h1>
+
       <div className="mb-4">
-        <label className="mr-4">Genre:</label>
-        <select value={genre} onChange={(e) => setGenre(e.target.value)} className="bg-gray-800 text-white p-2 rounded">
-          <option value="">All</option>
-          <option value="28">Action</option>
-          <option value="35">Comedy</option>
-          <option value="18">Drama</option>
-          <option value="12">History</option>
-        </select>
+        <label className="mx-4">Genre:</label>
+        <div className="flex gap-4 items-center flex-wrap">
+          {genreList.map((gen) => (
+            <button
+              key={gen.id}
+              onClick={() => handleGenre(gen.id)}
+              className={`p-2 rounded-2xl ${genres.includes(gen.id) ? 'bg-green-500' : 'bg-blue-500'} text-white`}
+            >
+              {gen.name}
+            </button>
+          ))}
+        </div>
       </div>
       <div className="mb-4">
         <label className="mr-4">Rating:</label>

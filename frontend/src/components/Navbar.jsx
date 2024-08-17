@@ -76,7 +76,12 @@ function Navbar() {
               <Link key={index} to={item.href} className="hover:bg-orange-500 hover:text-black p-2 rounded-xl">
                 {item.text}
               </Link>
-            ))}
+             
+            ))
+              
+            }
+            {user && <Link to='/movielist' className="hover:bg-orange-500 hover:text-black p-2 rounded-xl" >WatchedList</Link> } 
+           
           </div>
           {/* Search  */}
           <div className="relative flex flex-col w-80 items-center">

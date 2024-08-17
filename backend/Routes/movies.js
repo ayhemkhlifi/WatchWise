@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const MovieController = require('../controllers/moviecontrollers')
-
+const requireAuth = require('../middleware/RequireAuth')
+router.use(requireAuth)
 //showing all the movies from the mongo data base 
+
+
 router.get('/',MovieController.ShowMovies)
 
 

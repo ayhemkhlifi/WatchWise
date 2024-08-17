@@ -4,11 +4,12 @@ function Card(props){
 
     const {result , index} = props 
     const [movie ,setMovie] = useState(result.title ? true : false);
+    
      const detailPath = movie ? `/movie/${result.id}`: `/tv/${result.id}`  ;
     return(
         <div
                   key={index}
-                  className="flex-none w-52 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
+                  className="flex-none w-52 m-4 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
                 >
                   <Link to={detailPath}>
                     <img

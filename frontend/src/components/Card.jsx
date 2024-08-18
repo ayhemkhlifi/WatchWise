@@ -20,7 +20,7 @@ function Card(props) {
         />
         <div className="p-4 text-center">
           <h2 className="text-lg font-semibold">{result.title}</h2>
-          {!result.user_rating ? <h2 className="text-sm text-gray-400 mt-1">Rating: {result.vote_average}</h2> : <RatingValue rating={result.user_rating} />}
+          {!result.user_rating ? <h2 className="text-sm text-gray-400 mt-1">Rating: {result.vote_average}</h2> : <RatingValue  rating={result.user_rating -1} />}
         </div>
       </Link>
     </div>

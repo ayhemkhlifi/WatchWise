@@ -10,7 +10,7 @@ function Card(props) {
   return (
     <div
       key={index}
-      className="flex-none w-52 m-4 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
+      className="relative flex-none w-52 m-4 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
     >
       <Link to={detailPath}>
         <img
@@ -19,8 +19,8 @@ function Card(props) {
           className="w-full h-auto"
         />
         <div className="p-4 text-center">
-          <h2 className="text-lg font-semibold">{result.title}</h2>
-          {!result.user_rating ? <h2 className="text-sm text-gray-400 mt-1">Rating: {result.vote_average}</h2> : <RatingValue  rating={result.user_rating -1} />}
+          {result.title ?  <h2 className="text-lg font-semibold m-3">{result.title}</h2> :<h2 className="text-lg font-semibold m-3">{result.name}</h2>}
+          {!result.user_rating ? <h2 className="text-sm text-gray-400 mt-1">Rating: {result.vote_average}</h2> : <RatingValue   rating={result.user_rating -1} />}
         </div>
       </Link>
     </div>

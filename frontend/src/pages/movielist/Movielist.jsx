@@ -36,7 +36,7 @@ function Movielist() {
  
       
   return(
-    <div className=" flex p-4 deepspace pt-28">
+    <div className=" flex flex-wrap p-4 deepspace pt-28">
          {movies.map((movie,index)=>{
            const r = {
             "id":movie.movieid,

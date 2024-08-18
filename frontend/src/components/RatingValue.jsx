@@ -9,7 +9,7 @@ const  RatingValue =({rating}) =>{
   
 
   return (
-    <div className='flex flex-col items-center '>
+    <div className='absolute bottom-0 flex flex-col items-center '>
         <div className=" rounded-xl  p-2 flex  items-center gap-2">
         
               {[1,1,1,1,1].map((star,index)=>(

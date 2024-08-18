@@ -3,6 +3,10 @@ const Schema = mongoose.Schema
 
 const movieschema = new Schema (
     {
+        "rating":{
+            type:String,
+            require:true
+        },
         "movieid":{
             type:String,
             require:true

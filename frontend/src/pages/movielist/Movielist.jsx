@@ -43,6 +43,7 @@ function Movielist() {
             "title":movie.title,
             "vote_average":movie.imbd_rating,
             "poster_path":movie.poster_path,
+            "user_rating":movie.rating
             
           }
           return( <Card result={r} key={index}/>)

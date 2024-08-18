@@ -4,7 +4,8 @@ const Movie = require('../Models/movieModels')
 
 module.exports={
     AddMovie:async (req , res,next )=>{
-        const {movieid,title , poster_path ,imbd_rating} = req.body 
+        const {rating,movieid,title , poster_path ,imbd_rating} = req.body 
+        const r = rating 
         const mi= movieid
         const t = title 
         const p = poster_path  
@@ -12,9 +13,9 @@ module.exports={
         const ui = req.user._id
         
         try{
-                    if((await Movie.countDocuments({movieid:mi,title:t , poster_path:p,imbd_rating:i,user_id:ui}))==0){
+                    if((await Movie.countDocuments({ rating:r,movieid:mi,title:t , poster_path:p,imbd_rating:i,user_id:ui}))==0){
                         console.log('user doesnt have this movie in his watched list yet ')
-                        const m = await Movie.create({movieid:mi,title:t,poster_path:p,imbd_rating:i,user_id:ui})
+                        const m = await Movie.create({rating:r,movieid:mi,title:t,poster_path:p,imbd_rating:i,user_id:ui})
                         console.log('added the moveie the the database')
                         res.status(200).json(m)
                         

@@ -36,7 +36,7 @@ module.exports={
         if((await Movie.countDocuments({})==0)){
             res.status(200).json({"message":"no movies exist here"})
         }else{
-            const results = await Movie.find({user_id:ui})
+            const results = await Movie.find({user_id:ui}).sort({createdAt:-1})
             res.status(200).json(results)
         }
     }

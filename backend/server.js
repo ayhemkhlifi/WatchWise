@@ -6,7 +6,7 @@ const userroutes= require('./Routes/users')
 const cors = require('cors')
 dotenv.config()
 const app = express()
-app.use(cors)
+
 
 
 //middleware to analyse the on comming http request as json format
@@ -26,4 +26,3 @@ mongoose.connect(process.env.mongodburl)
 app.use('/movies',movieroutes)
 app.use('/users',userroutes)
 
-module.exports = app;

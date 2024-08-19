@@ -6,14 +6,8 @@ const userroutes= require('./Routes/users')
 const cors = require('cors')
 dotenv.config()
 const app = express()
+app.use(cors)
 
-app.use(cors(
-    {
-        origin:["https://watch-wise-two.vercel.app/"],
-        methods:["POST","GET"],
-        credentials:true
-    }
-))
 
 //middleware to analyse the on comming http request as json format
 app.use(express.json())
@@ -28,6 +22,8 @@ mongoose.connect(process.env.mongodburl)
     })
 })
 
+
 app.use('/movies',movieroutes)
 app.use('/users',userroutes)
 
+module.exports = app;

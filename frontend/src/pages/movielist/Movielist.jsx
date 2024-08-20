@@ -5,6 +5,8 @@ import Card from "../../components/Card";
 function Movielist() {
   const [movies,setMovies]=useState([])
   const {user}=useAuthContext()
+  const [loading, setLoading] = useState(true);
+
   useEffect(
     ()=>{
       const effect= async ()=>{
@@ -23,6 +25,7 @@ function Movielist() {
        const response = await fetch('/movies',getoptions)
        const json = await response.json()
        setMovies(json)
+       setLoading(false)
       }
         
     }
@@ -31,7 +34,13 @@ function Movielist() {
   )
   
   
-
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="loader"></div>
+      </div>
+    );
+  }
 
  
       

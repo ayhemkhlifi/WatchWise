@@ -26,7 +26,8 @@ const movieschema = new Schema (
         "user_id":{
             type:String,
             require:true
-        }
+        },
+       
        
     },
     {

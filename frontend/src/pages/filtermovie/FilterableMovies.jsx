@@ -7,6 +7,8 @@ function FilterableMovies() {
   const [genres, setGenres] = useState([]);
   const [rating, setRating] = useState("");
   const [releaseYear, setReleaseYear] = useState("");
+  const [loading, setLoading] = useState(true);
+
 
   const genreList = [
     { name: "Action", id: 28 },
@@ -55,6 +57,7 @@ function FilterableMovies() {
 
         setMovies(allMovies);
         setFilteredMovies(allMovies);
+        setLoading(false);
       } catch (error) {
         console.error("Failed to fetch movies:", error);
       }
@@ -92,6 +95,14 @@ function FilterableMovies() {
       setGenres([...genres, genreId]);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="loader"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-28 deepspace min-h-screen w-full text-white flex flex-col items-center">

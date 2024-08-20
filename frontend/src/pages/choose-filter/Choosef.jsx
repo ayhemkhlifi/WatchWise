@@ -1,7 +1,21 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Choosef() {
+  const [loading, setLoading] = useState(true);
+  useEffect   (
+    ()=>{
+      setLoading(false);
+    }
+  )
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="loader"></div>
+      </div>
+    );
+  }
   return (
     <div className="pt-28 min-h-screen w-full text-white flex flex-col items-center justify-center deepspace">
       <h1 className="text-4xl font-bold mb-10">Choose a Filter Option</h1>

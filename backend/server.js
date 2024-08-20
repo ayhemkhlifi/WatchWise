@@ -3,6 +3,7 @@ const mongoose= require('mongoose')
 const dotenv = require('dotenv')
 const movieroutes=require('./Routes/movies')
 const userroutes= require('./Routes/users')
+const reviewRoutes = require('./Routes/reviews')
 
 dotenv.config()
 const app = express()

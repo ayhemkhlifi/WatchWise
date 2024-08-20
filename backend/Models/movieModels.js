@@ -28,6 +28,7 @@ const movieschema = new Schema (
             require:true
         }
        
+       
     },
     {
         timestamps:true

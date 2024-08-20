@@ -24,4 +24,5 @@ mongoose.connect(process.env.mongodburl)
 
 app.use('/movies',movieroutes)
 app.use('/users',userroutes)
+app.use('/reviews', reviewRoutes);
 

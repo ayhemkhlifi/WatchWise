@@ -3,13 +3,11 @@ const mongoose= require('mongoose')
 const dotenv = require('dotenv')
 const movieroutes=require('./Routes/movies')
 const userroutes= require('./Routes/users')
-const cors = require('cors')
+
 dotenv.config()
 const app = express()
 
-app.use(cors(
-   
-))
+
 
 //middleware to analyse the on comming http request as json format
 app.use(express.json())

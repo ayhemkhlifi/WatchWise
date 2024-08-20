@@ -18,7 +18,7 @@ function MovieDetail() {
 
   // Handle adding movie to watched list
   const handleadd = async (index) => {
-    const r = index + 1;
+    const r = index +1;
     const mi = movie.id;
     const t = movie.original_title;
     const p = movie.poster_path;
@@ -32,7 +32,7 @@ function MovieDetail() {
           Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify({
-          rating: r,
+          rating:r,
           movieid: mi,
           title: t,
           poster_path: p,

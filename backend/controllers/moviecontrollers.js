@@ -4,7 +4,7 @@ const Movie = require('../Models/movieModels')
 
 module.exports={
     AddMovie:async (req , res,next )=>{
-        const {rating,movieid,title , poster_path ,imbd_rating } = req.body 
+        const {rating,movieid,title , poster_path ,imbd_rating} = req.body 
      
         const r = rating 
         const mi= movieid

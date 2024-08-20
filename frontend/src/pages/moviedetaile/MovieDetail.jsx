@@ -62,12 +62,12 @@ function MovieDetail() {
       const response = await fetch("/reviews", postoptions);
       const json = await response.json();
 
-      // After submission, update reviews list and show a success message
-      setReviews([ json]); // Add the new review to the list
+      const newreviews= [...reviews, json];
+      setReviews( newreviews); 
       setUserReview(""); // Clear the input field
       setMessage("Review sent successfully!"); // Show success message
 
-      // Hide the message after a few seconds
+      
       setTimeout(() => {
         setMessage("");
       }, 3000);

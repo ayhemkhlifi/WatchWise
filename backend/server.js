@@ -8,11 +8,7 @@ dotenv.config()
 const app = express()
 
 app.use(cors(
-    {
-        origin:["https://watch-wise-two.vercel.app/"],
-        methods:["POST","GET"],
-        credentials:true
-    }
+   
 ))
 
 //middleware to analyse the on comming http request as json format

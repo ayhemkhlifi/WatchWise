@@ -4,8 +4,11 @@ const dotenv = require('dotenv')
 const movieroutes=require('./Routes/movies')
 const userroutes= require('./Routes/users')
 const reviewRoutes = require('./Routes/reviews')
+
 dotenv.config()
 const app = express()
+
+
 
 //middleware to analyse the on comming http request as json format
 app.use(express.json())

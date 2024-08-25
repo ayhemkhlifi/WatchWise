@@ -22,7 +22,7 @@ function Movielist() {
         
        
       }
-       const response = await fetch('/movies',getoptions)
+       const response = await fetch('https://watchwise-3.onrender.com/movies',getoptions)
        const json = await response.json()
        setMovies(json)
        setLoading(false)

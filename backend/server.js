@@ -19,11 +19,10 @@ app.use(cors())
 mongoose.connect(process.env.mongodburl)
 .then(()=>{
     console.log("connected to the database");
-    app.listen(port,()=>{
+    app.listen(process.env.PORT,()=>{
         console.log("app listening on port ")
     })
 })
-app.use('/',(req,res)=>{res.send("hello")})
 app.use('/movies',movieroutes)
 app.use('/users',userroutes)
 app.use('/reviews', reviewRoutes);

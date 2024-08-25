@@ -265,6 +265,8 @@ function MovieDetail() {
                     key={index}
                     className="bg-gray-800 p-4 mt-4 rounded-lg"
                   >
+
+                    <p className="text-yellow-400 font-bold">{review.user_id.username}</p>
                     <p className="text-white">{review.review}</p>
                   </div>
                 ))

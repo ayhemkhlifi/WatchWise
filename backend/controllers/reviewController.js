@@ -17,12 +17,12 @@ const createReview = async (req, res, next) => {
   }
 };
 
-// Get all reviews for a movie
-const getReviews = async (req, res) => {
-  const { movieId } = req.params;
-
+/// Fetch reviews with username
+const getReviewsForMovie = async (req, res) => {
   try {
-    const reviews = await Review.find({ movieId }).sort({ createdAt: -1 });
+    const reviews = await Review.find({ movieId: req.params.movieId })
+      .populate('user_id', 'username') // Populate the username from the User model
+      .exec();
     res.status(200).json(reviews);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -31,5 +31,5 @@ const getReviews = async (req, res) => {
 
 module.exports = {
   createReview,
-  getReviews,
+  getReviewsForMovie,
 };

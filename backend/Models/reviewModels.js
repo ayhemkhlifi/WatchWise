@@ -8,8 +8,9 @@ const reviewschema = new Schema(
       required: true
     },
     "user_id":{
-            type:String,
-            require:true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User', // Reference to the User schema
+      required: true
      },
      
    

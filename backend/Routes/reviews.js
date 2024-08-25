@@ -1,6 +1,6 @@
 const express = require('express');
 const requireAuth = require('../middleware/RequireAuth');
-const { createReview, getReviews } = require('../controllers/reviewController');
+const { createReview,getReviewsForMovie } = require('../controllers/reviewController');
 
 const router = express.Router();
 
@@ -11,6 +11,6 @@ router.use(requireAuth);
 router.post('/', createReview);
 
 // Route to get all reviews for a movie
-router.get('/:movieId', getReviews);
+router.get('/:movieId', getReviewsForMovie);
 
 module.exports = router;

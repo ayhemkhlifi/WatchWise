@@ -6,7 +6,7 @@ const userSchema = new Schema (
     {
         "username":{
             type:String,
-            rquire:true,
+            require:true,
         },
         "email":{
             type:String ,

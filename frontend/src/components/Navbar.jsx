@@ -100,7 +100,7 @@ function Navbar() {
            
           </div>
           
-          
+
           {/* Log-In  */}
           {!user && <Link  to="/login" className="hidden md:flex gap-2 hover:bg-orange-500 p-2 rounded-xl text-white">
             <User />

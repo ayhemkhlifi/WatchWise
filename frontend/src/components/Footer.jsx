@@ -13,7 +13,7 @@ import {
 
 function Footer() {
   return (
-    <div className="text-white deepspace_inverse flex flex-col items-center">
+    <div className="text-white deepspace_inverse flex flex-col items-center overflow-x-hidden">
         <div className="text-white text-2xl font-bold flex flex-col items-center gap-1">
           <img
             src="/images/WatchWise_prev_ui.png"

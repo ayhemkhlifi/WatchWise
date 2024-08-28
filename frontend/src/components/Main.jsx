@@ -170,7 +170,7 @@ function Main() {
   };
 
   return (
-    <div className="pt-28 deepspace bg-gray-900 min-h-screen flex flex-col gap-5">
+    <div className="pt-28 deepspace bg-gray-900 min-h-screen flex flex-col gap-5 w-full overflow-x-hidden">
       {loading ? (
         // Loader
         <div className="flex justify-center items-center min-h-screen">
@@ -180,8 +180,8 @@ function Main() {
         <>
           {/* Top Rated Movies */}
           <Link
-            to="/categorie-page"
-            className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center"
+            to="/category/top-rated"
+            className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 w-[30%] max-md:w-full items-center"
           >
             <div className="h-10 border-l-4 border-yellow-600"></div>
 
@@ -215,7 +215,7 @@ function Main() {
 
         
           {/* upcomming movies */}
-          <Link className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center">
+          <Link to="/category/upcoming" className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center">
             <div className="h-10 border-l-4 border-yellow-600"></div>
 
             <h2> upcomming movies</h2>
@@ -330,7 +330,7 @@ function Main() {
 
             <div
               ref={popularPeopleRef}
-              className="flex flex-nowrap overflow-x-scroll scrollbar-hide  px-10  animate-slideUp rounded-full shadow-inner "
+              className="flex flex-nowrap overflow-x-scroll scrollbar-hide  px-10  animate-slideUp  shadow-inner "
             >
               {PopularPeople.map((person, index) => (
                 <div

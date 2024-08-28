@@ -9,7 +9,7 @@ export const useLogin = ()=>{
     const login = async ( email , password)=>{
         setIsLoading(true)
         setError(null)
-        const response = await fetch('https://watchwise-3.onrender.com/users/signin',{
+        const response = await fetch('https://watch-wise-yish.vercel.app/users/signin',{
             method:'POST',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify({email,password})

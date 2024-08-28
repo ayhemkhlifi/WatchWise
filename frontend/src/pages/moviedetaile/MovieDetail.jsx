@@ -113,7 +113,7 @@ function MovieDetail() {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const response = await fetch('/movies/${movie.id}`, postoptions);
+        const response = await fetch(`/movies/${movie.id}`, postoptions);
         const json = await response.json();
         !json.message ? setWatched(true) : setWatched(false);
       }

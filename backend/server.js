@@ -23,7 +23,7 @@ mongoose.connect(process.env.mongodburl)
         console.log("app listening on port ")
     })
 })
-app.use('/',(req,res)=>{res.send("hello")})
+
 app.use('/movies',movieroutes)
 app.use('/users',userroutes)
 app.use('/reviews', reviewRoutes);

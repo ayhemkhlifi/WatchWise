@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuthContext } from "../hooks/useAuthContext";
+
 
 import { X ,User } from './Icones'; 
 
 function Sidebar({ isOpen, onClose }) {
+  const {user} = useAuthContext();
+
   return (
     <div
-      className={`fixed top-0 left-0 h-full w-64 bg-gray-950 text-white transform ${
+      className={`fixed top-0 left-0 h-full w-full bg-gray-950 text-white transform ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } transition-transform duration-300 ease-in-out`}
     >
@@ -17,14 +21,18 @@ function Sidebar({ isOpen, onClose }) {
       >
         <X />
       </button>
+      <img src="/images/WatchWise_prev_ui.png" alt="logo" className="h-16 w-auto" />
+
       
         <ul className="flex flex-col items-center py-10 gap-10">
-          <Link href="/" onClick={onClose} className="text-white text-lg">Home</Link>
-          <Link href="/" onClick={onClose} className="text-white text-lg">Discover</Link>
-          <Link href="/login" onClick={onClose} className=" flex gap-2 hover:bg-orange-500 p-2 rounded-xl">
+          <Link to="/" onClick={onClose} className="text-white text-lg">Home</Link>
+          <Link to="/choose-filter" onClick={onClose} className="text-white text-lg">Discover</Link>
+          <Link to="/login" onClick={onClose} className=" flex gap-2 hover:bg-orange-500 p-2 rounded-xl">
             <User />
             <h1 className="text-white text-lg">Log-In</h1>
           </Link>
+          {user && <Link to='/movielist' onClick={onClose} className="hover:bg-orange-500 hover:text-black p-2 rounded-xl" >WatchedList</Link> } 
+
           
         </ul>
       

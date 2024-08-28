@@ -39,7 +39,7 @@ function MovieDetail() {
           imbd_rating: i,
         }),
       };
-      const response = await fetch("https://watchwise-3.onrender.com/movies", postoptions);
+      const response = await fetch("https://watch-wise-yish.vercel.app/movies", postoptions);
       const json = await response.json();
       setWatched(true);
     }
@@ -59,7 +59,7 @@ function MovieDetail() {
           movieId: movie.id,
         }),
       };
-      const response = await fetch("https://watchwise-3.onrender.com/reviews", postoptions);
+      const response = await fetch("https://watch-wise-yish.vercel.app/reviews", postoptions);
       const json = await response.json();
 
       const newreviews= [...reviews, json];
@@ -113,7 +113,7 @@ function MovieDetail() {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const response = await fetch(`https://watchwise-3.onrender.com/movies/${movie.id}`, postoptions);
+        const response = await fetch(`https://watch-wise-yish.vercel.app/movies/${movie.id}`, postoptions);
         const json = await response.json();
         !json.message ? setWatched(true) : setWatched(false);
       }
@@ -132,7 +132,7 @@ function MovieDetail() {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const response = await fetch(`https://watchwise-3.onrender.com/reviews/${movie.id}`, postoptions);
+        const response = await fetch(`https://watch-wise-yish.vercel.app/reviews/${movie.id}`, postoptions);
         const json = await response.json();
         setReviews(json);
       }

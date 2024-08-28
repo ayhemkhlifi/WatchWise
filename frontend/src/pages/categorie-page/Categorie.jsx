@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Card from '../../components/Card';
 
 const Categorie = () => {
   const { category } = useParams();
@@ -9,7 +10,7 @@ const Categorie = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
+    console.log(category);
     const options = {
       method: "GET",
       headers: {
@@ -20,10 +21,11 @@ const Categorie = () => {
     };
     const fetchData = async () => {
       try {
-        let url = '';
-
+        let url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';
+          
         switch (category) {
-          case 'top_rated':
+
+          case 'top-rated':
             url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';
             break;
           case 'upcoming':
@@ -33,6 +35,7 @@ const Categorie = () => {
           
           default:
             throw new Error('Invalid category');
+            break;
         }
 
         const response = await fetch(url, options);
@@ -44,6 +47,7 @@ const Categorie = () => {
         const result = await response.json();
         
         setData(result);
+        
         console.log(data)
       } catch (error) {
         setError(error.message);
@@ -53,26 +57,17 @@ const Categorie = () => {
     };
 
     fetchData();
-  }, [category]);
+  }, []);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    <div className='p-24 deepspace'>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 ">
         {data && data.results ? (
-          data.results.map((movie) => (
-            <div key={movie.id} className="p-4 bg-gray-800 rounded">
-              <Link to={`/movie/${movie.id}`}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                  className="w-full rounded"
-                />
-                <h3 className="text-white mt-2 text-center">{movie.title}</h3>
-              </Link>
-            </div>
+          data.results.map((movie , index) => (
+            <Card result={movie} key={index}/>
           ))
         ) : (
           <div className='text-white text-xl text-center mt-52'>No movies found.</div>

@@ -55,10 +55,10 @@ function Navbar() {
 
   return (
     <section className="w-full z-50 fixed">
-      <nav className="w-full deepspace">
+      <nav className="w-full deepspace relative">
         <div className="flex items-center justify-between max-md:justify-around p-4 max-md:px-8">
           {/* Menu button for small screens */}
-          <button onClick={toggleSidebar} className="md:hidden text-white text-2xl pl-3">
+          <button onClick={toggleSidebar} className="md:hidden text-white text-2xl pl-3 absolute top-6 left-1">
             <Menu />
           </button>
           {/* Logo and title */}
@@ -95,7 +95,7 @@ function Navbar() {
             <User />
             <h1 className="text-white text-lg">Log-In</h1>
           </Link>}
-          {user && <button className="text-white text-lg md:flex" onClick={logout}>
+          {user && <button className=" hidden md:flex text-white text-lg md:flex" onClick={logout}>
             <User /> Logout
           </button>}
         </div>

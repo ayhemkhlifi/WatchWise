@@ -39,7 +39,7 @@ function MovieDetail() {
           imbd_rating: i,
         }),
       };
-      const response = await fetch("https://watchwise-3.onrender.com/movies", postoptions);
+      const response = await fetch("/movies", postoptions);
       const json = await response.json();
       setWatched(true);
     }
@@ -59,7 +59,7 @@ function MovieDetail() {
           movieId: movie.id,
         }),
       };
-      const response = await fetch("https://watchwise-3.onrender.com/reviews", postoptions);
+      const response = await fetch("/reviews", postoptions);
       const json = await response.json();
 
       const newreviews= [...reviews, json];
@@ -87,7 +87,7 @@ function MovieDetail() {
     const fetchMovieDetails = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+          `/movie/${id}?language=en-US`,
           options
         );
         const result = await response.json();
@@ -113,7 +113,7 @@ function MovieDetail() {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const response = await fetch(`https://watchwise-3.onrender.com/movies/${movie.id}`, postoptions);
+        const response = await fetch('/movies/${movie.id}`, postoptions);
         const json = await response.json();
         !json.message ? setWatched(true) : setWatched(false);
       }
@@ -132,7 +132,7 @@ function MovieDetail() {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const response = await fetch(`https://watchwise-3.onrender.com/reviews/${movie.id}`, postoptions);
+        const response = await fetch(`/reviews/${movie.id}`, postoptions);
         const json = await response.json();
         setReviews(json);
       }

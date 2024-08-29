@@ -231,7 +231,7 @@ function MovieDetail() {
   
           {/* Review Section */}
           <div className="w-full px-4 lg:px-8 mt-12">
-            {user && (
+            {user && watched && (
               <div className="mt-8 flex flex-col items-center">
                 <h3 className="text-2xl font-bold text-yellow-500">
                   Add Your Review

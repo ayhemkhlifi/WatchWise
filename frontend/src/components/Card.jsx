@@ -10,7 +10,7 @@ function Card(props) {
   return (
     <div
       key={index}
-      className="relative flex-none w-52 max-sm:w-96   m-4 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
+      className="relative block flex-none w-52 max-sm:w-[85%]  max-sm:h-full   m-7 flex flex-col items-center bg-gray-800 rounded-xl shadow-lg overflow-hidden text-white hover:shadow-2xl transition-shadow"
     >
       <Link to={detailPath}>
         <img

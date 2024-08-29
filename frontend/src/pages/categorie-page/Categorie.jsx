@@ -25,12 +25,18 @@ const Categorie = () => {
           
         switch (category) {
 
-          case 'top-rated':
+          case 'Top Rated Movies':
             url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';
             break;
-          case 'upcoming':
+          case 'Upcomming Movies':
             url = 'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1';
             break;
+          case 'Popular TV Shows':
+            url = 'https://api.themoviedb.org/3/tv/popular?language=en-US&page=1';
+            break;
+            case 'Top rated TV Shows':
+            url = 'https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1';
+              break;
           
           
           default:
@@ -63,8 +69,9 @@ const Categorie = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className='p-24 deepspace'>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 ">
+    <div className='p-16 deepspace flex flex-col items-center '>
+      <h1 className=' text-2xl text-white font-bold p-6 '>{category}</h1>
+      <div className="flex flex-wrap  gap-4 ">
         {data && data.results ? (
           data.results.map((movie , index) => (
             <Card result={movie} key={index}/>

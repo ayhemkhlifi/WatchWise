@@ -13,7 +13,7 @@ import {
 
 function Footer() {
   return (
-    <div className="text-white deepspace_inverse flex flex-col items-center overflow-x-hidden">
+    <div className="text-white deepspace_inverse flex flex-col items-center  ">
         <div className="text-white text-2xl font-bold flex flex-col items-center gap-1">
           <img
             src="/images/WatchWise_prev_ui.png"
@@ -23,7 +23,7 @@ function Footer() {
           <h1>Watchwise</h1>
         </div>
     
-      <div className=" w-full flex justify-around ">
+      <div className=" w-full flex max-sm:flex-wrap justify-around  ">
         <div className="flex flex-col gap-4 p-10">
           <h2 className="text-2xl font-semibold  ">Follow Us</h2>
           <div className="flex gap-3">
@@ -33,7 +33,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 p-10">
+        <div className="flex flex-col gap-4 p-10 ">
           <h2 className="text-2xl font-semibold  ">Phone</h2>
           <div className="flex">
             <Phone />
@@ -54,7 +54,7 @@ function Footer() {
 
       <hr className="border-t-2 border-gray-300  w-[50%]" />
 
-     <div className="flex gap-8">
+     <div className="flex items-center gap-8">
         <Link to="/" className=" hover:text-yellow-600">terms and conditions</Link>    
         <Link to="/" className=" hover:text-yellow-600">privacy policy</Link>        
         <Link to="/" className=" hover:text-yellow-600">quality policy</Link>  

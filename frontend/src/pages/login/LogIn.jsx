@@ -16,8 +16,8 @@ function LogIn() {
     await login(email,password)
   }
   return (
-    <section className="deepspace_inverse h-screen flex justify-center items-center">
-      <form className="flex flex-col items-center gap-y-10 bg-gray-900 w-full max-w-md mx-auto rounded-2xl shadow-2xl">
+    <section className="deepspace_inverse h-screen flex p-8 justify-center items-center">
+      <form className=" flex flex-col items-center gap-y-10 bg-gray-900 w-full  max-w-md mx-auto rounded-2xl shadow-2xl">
       <img src="/images/WatchWise_prev_ui.png" alt="logo" className="h-16 w-auto" />
 
 

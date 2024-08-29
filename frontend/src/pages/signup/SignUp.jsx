@@ -25,7 +25,7 @@ function SignUp() {
   };
 
   return (
-    <section className="deepspace_inverse h-screen flex justify-center items-center">
+    <section className="deepspace_inverse h-screen flex p-8 justify-center items-center">
     <form className="flex flex-col items-center gap-y-10 bg-gray-900 w-full max-w-md mx-auto rounded-2xl shadow-2xl">
     <img src="./images/WatchWise_prev_ui.png" alt="logo" className="h-16 w-auto" />
 
@@ -62,7 +62,7 @@ function SignUp() {
       </div>
       <div className="bg-gray-800 flex flex-col items-center w-full rounded-b-2xl shadow-b-2xl p-6">
         <p className="text-white text-center">You Have An Acount ? </p>
-        <Link href="/login" className="text-white bg-orange-600 text-center w-[50%] rounded-lg p-2 mt-2 hover:bg-orange-500">Log In</Link>
+        <Link to="/login" className="text-white bg-orange-600 text-center w-[50%] rounded-lg p-2 mt-2 hover:bg-orange-500">Log In</Link>
       </div>
     </form>
   </section>

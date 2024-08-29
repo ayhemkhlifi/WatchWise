@@ -87,7 +87,7 @@ function MovieDetail() {
     const fetchMovieDetails = async () => {
       try {
         const response = await fetch(
-          `/movie/${id}?language=en-US`,
+          `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
           options
         );
         const result = await response.json();

@@ -180,7 +180,7 @@ function Main() {
         <>
           {/* Top Rated Movies */}
           <Link
-            to="/category/top-rated"
+            to="/category/Top Rated Movies"
             className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 w-[30%] max-md:w-full items-center"
           >
             <div className="h-10 border-l-4 border-yellow-600"></div>
@@ -215,10 +215,10 @@ function Main() {
 
         
           {/* upcomming movies */}
-          <Link to="/category/upcoming" className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center">
+          <Link to="/category/Upcomming Movies" className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center">
             <div className="h-10 border-l-4 border-yellow-600"></div>
 
-            <h2> upcomming movies</h2>
+            <h2> Upcomming Movies</h2>
             <Torigntarow />
           </Link>
 
@@ -248,7 +248,7 @@ function Main() {
 
 
           {/* Popular TV Shows */}
-          <Link className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center">
+          <Link to="/category/Popular TV Shows"className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center">
             <div className="h-10 border-l-4 border-yellow-600"></div>
 
             <h2>Popular TV Shows</h2>
@@ -280,7 +280,7 @@ function Main() {
 
 
           {/* Top rated TV Shows */}
-          <Link className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center">
+          <Link to="/category/Top rated TV Shows" className="text-2xl pl-8 text-white font-bold my-6 flex gap-2 items-center">
             <div className="h-10 border-l-4 border-yellow-600"></div>
 
             <h2>Top rated TV Shows</h2>

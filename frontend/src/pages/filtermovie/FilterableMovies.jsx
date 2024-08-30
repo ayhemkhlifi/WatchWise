@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function FilterableMovies() {
+  const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [rating, setRating] = useState("");
   const [releaseYear, setReleaseYear] = useState("");
   const [loading, setLoading] = useState(true);
-
 
   const genreList = [
     { name: "Action", id: 28 },
@@ -36,58 +36,53 @@ function FilterableMovies() {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMGRjYWNjMWE2NmFlM2Y5OWYzNDI5MDQ1NzkxMjE3NCIsIm5iZiI6MTcyMzY2MDM2Ny42NTExMDgsInN1YiI6IjY2YjNhZDAyN2E2NTM4Yzg4MDdiOTY4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cURFiSbWrh7tKf-mMnr6wHmVSPKiyGIRGbQyGYaRzOg'
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMGRjYWNjMWE2NmFlM2Y5OWYzNDI5MDQ1NzkxMjE3NCIsIm5iZiI6MTcyMzY2MDM2Ny42NTExMDgsInN1YiI6IjY2YjNhZDAyN2E2NTM4Yzg4MDdiOTY4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cURFiSbWrh7tKf-mMnr6wHmVSPKiyGIRGbQyGYaRzOg",
     },
   };
-
+  //add the event listener for the user scroll to the bottum of the screen we should fetch more movies
+  const handlescroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight
+    ) {
+      setPage((perv) => perv + 1);
+    }
+  };
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const pages = [];
-        for (let i = 1; i <= 200; i++) {
-          pages.push(i);
-        }
-        const promises = pages.map(page =>
-          fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`, options)
-            .then(response => response.json())
-        );
-
-        const results = await Promise.all(promises);
-        const allMovies = results.flatMap(data => data.results || []);
-
-        setMovies(allMovies);
-        setFilteredMovies(allMovies);
-        setLoading(false);
-      } catch (error) {
-        console.error("Failed to fetch movies:", error);
-      }
-    };
-
-    fetchMovies();
+    window.addEventListener("scroll", handlescroll);
+    return () => window.removeEventListener("scroll", handlescroll);
   }, []);
-
+useEffect(
+    ()=>{
+          setMovies([])
+    },
+    [ genres, rating, releaseYear ]
+  )
   useEffect(() => {
     const fetchFilteredMovies = async () => {
       try {
         let genreSelected = genres.length > 0 ? genres.join(",") : "";
 
         const response = await fetch(
-          `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genreSelected}&vote_average.gte=${rating}&primary_release_year=${releaseYear}`,
+          `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}}&sort_by=popularity.desc&with_genres=${genreSelected}&vote_average.gte=${rating}&primary_release_year=${releaseYear}`,
           options
         );
         const data = await response.json();
-
-        setFilteredMovies(data.results || []);
+        setMovies((perv) => [...perv, ...data.results]);
+        setLoading(false);
       } catch (error) {
         console.error("Failed to fetch filtered movies:", error);
       }
     };
 
     fetchFilteredMovies();
-  }, [genres, rating, releaseYear]);
+  }, [page, genres, rating, releaseYear]);
+
 
   
-   //function for changing the genres list (add or delet from it )
+
+  //function for changing the genres list (add or delet from it )
   const handleGenre = (genreId) => {
     if (genres.includes(genreId)) {
       setGenres(genres.filter((id) => id !== genreId));
@@ -115,7 +110,9 @@ function FilterableMovies() {
             <button
               key={gen.id}
               onClick={() => handleGenre(gen.id)}
-              className={`p-2 rounded-2xl ${genres.includes(gen.id) ? 'bg-green-500' : 'bg-blue-500'} text-white`}
+              className={`p-2 rounded-2xl ${
+                genres.includes(gen.id) ? "bg-green-500" : "bg-blue-500"
+              } text-white`}
             >
               {gen.name}
             </button>
@@ -124,7 +121,11 @@ function FilterableMovies() {
       </div>
       <div className="mb-4">
         <label className="mr-4">Rating:</label>
-        <select value={rating} onChange={(e) => setRating(e.target.value)} className="bg-gray-800 text-white p-2 rounded">
+        <select
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
+          className="bg-gray-800 text-white p-2 rounded"
+        >
           <option value="">All</option>
           <option value="7">7+</option>
           <option value="8">8+</option>
@@ -142,8 +143,8 @@ function FilterableMovies() {
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
-        {filteredMovies && filteredMovies.length > 0 ? (
-          filteredMovies.map(movie => (
+        {movies && movies.length > 0 ? (
+          movies.map((movie) => (
             <Link key={movie.id} to={`/movie/${movie.id}`}>
               <img
                 src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}

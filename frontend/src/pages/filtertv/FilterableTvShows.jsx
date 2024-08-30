@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function FilterableTvShows() {
   const [tvShows, setTvShows] = useState([]);
-  const [filteredTvShows, setFilteredTvShows] = useState([]);
+  const [page , setPage] = useState([]);
   const [genres, setGenres] = useState([]);
   const [rating, setRating] = useState("");
   const [releaseYear, setReleaseYear] = useState("");
@@ -39,32 +39,27 @@ function FilterableTvShows() {
     },
   };
 
+  
+    
+
+  const handlescroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight
+    ) {
+      setPage((perv) => perv + 1);
+    }
+  };
   useEffect(() => {
-    const fetchTvShows = async () => {
-      try {
-        const pages = [];
-        for (let i = 1; i <= 100; i++) {
-          pages.push(i);
-        }
-        const promises = pages.map(page =>
-          fetch(`https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`, options)
-            .then(response => response.json())
-        );
-
-        const results = await Promise.all(promises);
-        const allTvShows = results.flatMap(data => data.results || []);
-
-        setTvShows(allTvShows);
-        setFilteredTvShows(allTvShows);
-      } catch (error) {
-        console.error("Failed to fetch TV shows:", error);
-      }
-    };
-
-    fetchTvShows();
-    setLoading(false);
+    window.addEventListener("scroll", handlescroll);
+    return () => window.removeEventListener("scroll", handlescroll);
   }, []);
-
+useEffect(
+    ()=>{
+          setTvShows([])
+    },
+    [ genres, rating, releaseYear ]
+  )
   useEffect(() => {
     const fetchFilteredTvShows = async () => {
       try {
@@ -75,15 +70,17 @@ function FilterableTvShows() {
           options
         );
         const data = await response.json();
-
-        setFilteredTvShows(data.results || []);
+        setTvShows(perv => [...perv , ...data.results])
+        setLoading(false);
       } catch (error) {
-        console.error("Failed to fetch filtered TV shows:", error);
+        console.error("Failed to fetch filtered movies:", error);
       }
     };
 
     fetchFilteredTvShows();
-  }, [genres, rating, releaseYear]);
+  }, [page, genres, rating, releaseYear]);
+
+
 
   // function for changing the genres list (add or delete from it)
   const handleGenre = (genreId) => {
@@ -143,8 +140,8 @@ function FilterableTvShows() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
-        {filteredTvShows && filteredTvShows.length > 0 ? (
-          filteredTvShows.map(show => (
+        {tvShows && tvShows.length > 0 ? (
+          tvShows.map(show => (
             <Link key={show.id} to={`/tv/${show.id}`}>
               <img
                 src={`https://image.tmdb.org/t/p/w185/${show.poster_path}`}

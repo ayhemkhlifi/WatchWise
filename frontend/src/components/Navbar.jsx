@@ -76,7 +76,7 @@ function Navbar() {
             {user && <Link to='/movielist' className="hover:bg-orange-500 hover:text-black p-2 rounded-xl">WatchedList</Link>}
           </div>
           {/* Search */}
-          <div className="relative flex flex-col  w-20 items-center ">
+          <div className="relative flex flex-col ml-20 w-20 items-center ">
             <form onSubmit={handleSearchSubmit} className="flex gap-1 items-center bg-gray-900 rounded-xl  md:w-50">
               <label htmlFor="search" className="sr-only">Search</label>
               <input

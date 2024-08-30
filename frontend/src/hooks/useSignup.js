@@ -9,7 +9,7 @@ export const useSignup = ()=>{
     const signup = async (username , email , password)=>{
         setIsLoading(true)
         setError(null)
-        const response = await fetch('/users/signup',{
+        const response = await fetch('https://watch-wise-yish.vercel.app/users/signup',{
             method:'POST',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify({username,email,password})
